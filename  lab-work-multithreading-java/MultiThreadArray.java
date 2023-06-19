@@ -6,6 +6,7 @@ class Demo implements Runnable {
     Thread t;
     int sum = 0;
     int[] partition;
+
     Demo(String threadName, int[] partition) {
         this.partition = partition;
         name = threadName;
@@ -22,7 +23,7 @@ class Demo implements Runnable {
     }
 
     public void run() {
-        System.out.println(name + " summing.");
+        System.out.println(name + " summing...");
         sum = getSum();
         System.out.println("Sum for " + name + ": " + sum);
     }
@@ -55,13 +56,14 @@ public class MultiThreadArray {
             demos[i] = d;
         }
         try {
-            System.out.println("Main thread is waiting");
+            System.out.println("Main thread is waiting...");
             for (Demo thread : demos) {
                 thread.t.join();
             }
-        }catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             System.out.println("Main thread was interrupted");
         }
+        System.out.println("Main Thread total summing...");
         int totalSum = 0;
         for (Demo thread : demos) {
             totalSum += thread.sum;
