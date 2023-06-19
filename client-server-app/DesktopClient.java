@@ -36,20 +36,16 @@ public class DesktopClient extends Application {
         responseLabel.setMaxWidth(240);
         signup.setOnAction(event -> {
             try {
-                // Construct the URL with the email as a query parameter
                 String responseText = URLEncoder.encode(em.getText(), StandardCharsets.UTF_8);
                 String urlString = "http://localhost:4004/?email=" + responseText;
                 URL url = new URL(urlString);
 
-                // Send the HTTP request
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
 
-                // Get the response
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String response = reader.readLine();
 
-                // Display the response in the label
                 Platform.runLater(() -> responseLabel.setText(response));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -58,7 +54,6 @@ public class DesktopClient extends Application {
         DropShadow shadow = new DropShadow();
         signup.setEffect(shadow);
 
-        // Add the controls to the root node
         rootNode.getChildren().addAll(email, em, responseLabel, signup);
 
         myStage.show();
